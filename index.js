@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 const DBurl = process.env.DBurl;
-
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(DBurl);
