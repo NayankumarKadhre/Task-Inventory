@@ -10,11 +10,10 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-const username = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWORD;
+const DBurl = process.env.DBurl;
 
 //connecting to mongoose DB
-mongoose.connect('mongodb+srv://' + username + ':' + password + '@cluster0.oo0bjqs.mongodb.net/TaskDB');
+mongoose.connect(DBurl);
 
 //Mongoose Schema
 const taskSchema ={
