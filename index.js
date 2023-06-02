@@ -12,8 +12,15 @@ app.use(express.static("public"));
 
 const DBurl = process.env.DBurl;
 
-//connecting to mongoose DB
-mongoose.connect(DBurl);
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(DBurl);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
 
 //Mongoose Schema
 const taskSchema ={
@@ -100,7 +107,8 @@ function getEmoji(value) {
       });
   });
   
-
-app.listen(process.env.PORT || 3000, function() {
-  console.log("Server started Successfully");
-});
+connectDB().then(() => {
+  app.listen(process.env.PORT || 3000, function() {
+    console.log("Server started Successfully");
+  });
+})
