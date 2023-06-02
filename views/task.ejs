@@ -1,0 +1,98 @@
+<%- include("header") -%>
+
+    <section id="heading">
+        <div class="heading-style">
+            <h1>Task Inventory</h1>
+        </div>
+    </section>
+
+    <!-- Tasks Section  -->
+    <section id="tasks">
+        <div class="container-fluid">
+            <form action="/" method="post">
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="col-md-5">
+                        <input name="Task" class="form-control">
+                    </div>
+                    <div class="col-md-2 form-floating">
+                        <select name="priority" class="form-select" id="floatingSelect1">
+                            <option selected>-- Priority --</option>
+                            <option value="High">🔴 High</option>
+                            <option value="Medium">🟠 Medium</option>
+                            <option value="Low">🟢 Low</option>
+                        </select>
+                        <label for="floatingSelect1">Priority</label>
+                    </div>
+                    <div class="col-md-2 form-floating">
+                        <select name="difficulty" class="form-select" id="floatingSelect2">
+                            <option selected>-- Difficulty --</option>
+                            <option value="Hard">🔴 Hard</option>
+                            <option value="Medium">🟠 Medium</option>
+                            <option value="Easy">🟢 Easy</option>
+                        </select>
+                        <label for="floatingSelect2">Difficulty</label>
+                    </div>
+                    <div class="col-md-2 form-floating">
+                        <select name="time" class="form-select" id="floatingSelect3">
+                            <option selected>-- Time Required --</option>
+                            <option value="Long">🔴 Long</option>
+                            <option value="Medium">🟠 Medium</option>
+                            <option value="Short">🟢 Short</option>
+                        </select>
+                        <label for="floatingSelect3">Time Required</label>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="confirm-task" type="submit" class="btn"><i
+                                class="fa-solid fa-check fa-xl"></i></button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="task-table" class="row d-flex align-items-center justify-content-center">
+                <div class="col-md-5">
+                    <h3>Tasks</h3>
+                </div>
+                <div class="col-md-2 form-floating">
+                    <h3>Priority</h3>
+                </div>
+                <div class="col-md-2 form-floating">
+                    <h3>Difficulty</h3>
+                </div>
+                <div class="col-md-2 form-floating">
+                    <h3>Time Required</h3>
+                </div>
+                <div class="col-md-1"></div>
+
+                <% newTask.forEach(task=> { %>
+                    <div class='col-md-5'>
+                        <p>
+                            <%= task.myTask %>
+                        </p>
+                    </div>
+                    <div class='col-md-2 form-floating'>
+                        <p>
+                            <%= task.Priority %>
+                        </p>
+                    </div>
+                    <div class='col-md-2 form-floating'>
+                        <p>
+                            <%= task.Difficulty %>
+                        </p>
+                    </div>
+                    <div class='col-md-2 form-floating'>
+                        <p>
+                            <%= task.TimeRequired %>
+                        </p>
+                    </div>
+                    <div class='col-md-1'>
+                        <form action="/delete" method="post">
+                            <input type="hidden" name="taskId" value="<%= task._id %>">
+                            <button type="submit" class="btn"><i class="fa-solid fa-trash fa-xl"></i></button>
+                        </form>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <%- include("footer") -%>
